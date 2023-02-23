@@ -5,10 +5,10 @@ var cityName = document.querySelector(".cityName");
 var tempNow = document.querySelector(".temp");
 var windNow = document.querySelector(".wind");
 var humidNow = document.querySelector(".humidity");
-var searchCity = docuement.querySelector(".cityListContainer");
+var searchCity = document.querySelector(".cityListContainer");
 var cityBtn = document.querySelector(".cityButton");
 
-var APIKey = "43973cffb25813812c8321c091ad172c";
+var APIKey = "8d95f27c47dd9fc44601f41384441183";
 var today = dayjs().format("MM/DD/YYYY");
 var nextDay = "";
 
@@ -105,3 +105,24 @@ function getWeather(latitude, longitude) {
       }
     });
 }
+// updates page with weather info when search button pressed
+button.addEventListener("click", function (event) {
+  event.preventDefault();
+  var city = inputCity.value.trim();
+  searchCities.push(city);
+  //  save into local Storage
+  localStorage.setItem("cityData", JSON.stringify(searchCities));
+  getApi(city);
+  init();
+});
+
+// updates page when user selects previously searched city from list
+searchCity.addEventListener("click", function (event) {
+  var element = event.target;
+  if (element.matches("button")) {
+    var city = element.getAttribute("data-city");
+    getApi(city);
+  }
+});
+
+init();
