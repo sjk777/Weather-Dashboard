@@ -51,5 +51,16 @@ function getApi(city){
 
 function getWeather(latitude,longitude){
     var weatherURL = 'https://api.openweathermap.org/data/2.5/forecast?lat='+latitude+'&lon='+longitude+'&cnt=6&units=imperial&appid='+ APIKey
-    
+    fetch(weatherURL)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function (data)){
+            cityName.textContent=data.city.name + ' ' +today
+            tempNow.textContent= 'Temp: ' + data.list[0].main.temp+ "°F"
+            windNow.textContent= 'Wind: ' + data.list[0].wind.speed+ "MPH"
+            humidNow.textContent = 'Humidity: ' + data.list[0].main.humidity + '%'
+
+            
+        }
 }
