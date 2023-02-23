@@ -55,12 +55,20 @@ function getWeather(latitude,longitude){
         .then(function (response){
             return response.json();
         })
-        .then(function (data)){
+        .then(function (data){
             cityName.textContent=data.city.name + ' ' +today
             tempNow.textContent= 'Temp: ' + data.list[0].main.temp+ "°F"
             windNow.textContent= 'Wind: ' + data.list[0].wind.speed+ "MPH"
             humidNow.textContent = 'Humidity: ' + data.list[0].main.humidity + '%'
 
+        dailyW.innerHTML = ''
+            for(let i=1; i<data.list.length; i++){
+                var temp= data.list[i].main.temp
+                var humidity = data.list[i].main.humidity
+                var wind = data.list[i].wind.speed
+                var icon = data.list[i].weather[0].icon
+                nextDay = dayjs().add(i, "day").format("MM/DD/YYYY");
+            }
             
-        }
+        })
 }
