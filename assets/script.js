@@ -15,3 +15,24 @@ var nextDay= "";
 
 var searchCities = [];
 
+function init(){
+    var listName = JSON.parse(localStorage.getItem("cityData"))
+        if(listName !== null) {
+            searchCities = listName;
+        }
+        saveToList()
+};
+
+function saveToList(){
+    searchCity.innerHTML= "";
+    for (let i = 0; i <searchCities.length; i++){
+        var selectedCity = searchCities[i]
+        var newName = document.createElement('button')
+        newName.setAttribute("type", "button")
+        newName.setAttribute("class", "col-12 btn bg-light cityButton mt-3")
+        newName.setAttribute("data-city", selectedCity)
+        newName.textContent = selectedCity
+        searchCity.appendChild(newName)
+    }
+}
+
